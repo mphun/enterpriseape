@@ -1,4 +1,10 @@
-Rails.application.routes.draw do
+#Rails.application.routes.draw do
+  
+Enterpriseape::Application.routes.draw do
+  resources :companies do 
+    collection { post :import }
+  end
+
   devise_for :users
   get 'welcome/index'
   get 'welcome/about'
