@@ -1,6 +1,4 @@
-#Rails.application.routes.draw do
 Enterpriseape::Application.routes.draw do
-  resources :purchases
 
   resources :employees
 
@@ -9,14 +7,15 @@ Enterpriseape::Application.routes.draw do
   end
 
   devise_for :users
-  get 'welcome/index'
-  get 'welcome/about'
-  get 'welcome/contact'
-  get 'welcome/faq'
-  get 'welcome/pricing'
-  get 'welcome/features'
+  get "welcome/index"
+  get "welcome/about"
+  get "welcome/contact"
+  get "welcome/faq"
+  get "welcome/pricing"
+  get "welcome/features"
 
-  resources :invoices
-  
+  resources :invoices do
+    resources :purchases, except: [:index], controller: 'invoices/purchases'
+  end
   root to: 'welcome#index'
 end
